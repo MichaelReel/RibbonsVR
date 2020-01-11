@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "BrushHandle",
+"language": "GDScript",
+"path": "res://Tool/BrushHandle.gd"
+} ]
 _global_script_class_icons={
-
+"BrushHandle": ""
 }
 
 [application]
