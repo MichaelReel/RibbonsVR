@@ -16,6 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Ribbons VR"
+run/main_scene="res://RibbonSpace.tscn"
 config/icon="res://icon.png"
 
 [gdnative]
