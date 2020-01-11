@@ -18,6 +18,10 @@ _global_script_class_icons={
 config/name="Ribbons VR"
 config/icon="res://icon.png"
 
+[gdnative]
+
+singletons=[ "res://addons/godot-openvr/godot_openvr.gdnlib" ]
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
