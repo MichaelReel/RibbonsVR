@@ -1,5 +1,16 @@
 extends MeshInstance
 
+signal stroke_started(position, draw_head)
+signal segment(position, draw_head)
+signal stroke_ended(position, draw_head)
+
+const min_size = Vector2(0.01, 0.01)
+const max_size = Vector2(2.0, 2.0)
+const edit_speed = Vector2(0.1, 0.1)
+
+var drawing : bool = false
+var previous_position : Vector3 = self.get_global_transform().origin
+
 onready var plane_mesh : PlaneMesh = self.mesh
 onready var controller : ARVRController
 onready var brush : BrushHandle = get_node("../..")
@@ -7,12 +18,6 @@ onready var brush : BrushHandle = get_node("../..")
 onready var base_size = plane_mesh.get_size()
 onready var base_translation = translation
 onready var z_offset = - ( - base_size.y / 2 - base_translation.z)
-
-const min_size = Vector2(0.01, 0.01)
-const max_size = Vector2(2.0, 2.0)
-const edit_speed = Vector2(0.1, 0.1)
-
-#var previous_line : AABB = null
 
 func _process(delta):
 	
@@ -44,10 +49,23 @@ func update_brush_size(delta):
 
 func draw_ribbon(delta):
 	if controller.is_button_pressed(15):
-		# TODO: Need to start a drawing mesh when none existent
-		#       Make the ribbon section as the controller is moved
-		#       Finalise sections when the controller is moved far enough
-		#       May need some kind a singleton service to manage the drawing
-		
-		pass
-			
+		if drawing:
+			# Make the ribbon section as the controller is moved
+			# Finalise sections when the controller is moved far enough
+			var current_position = self.get_global_transform().origin
+			var moved_distance = current_position.distance_to(previous_position)
+			var brush_length = plane_mesh.get_size().y
+			if (moved_distance >= brush_length):
+				previous_position = previous_position.linear_interpolate(current_position, moved_distance / brush_length)
+				emit_signal("segment", previous_position, self)
+		else:
+			# Need to start a drawing mesh when none existent
+			previous_position = self.get_global_transform().origin
+			emit_signal("stroke_started", previous_position, self)
+			drawing = true
+	else:
+		if drawing:
+			# Draw last section of ribbon
+			previous_position = self.get_global_transform().origin
+			emit_signal("stroke_ended", previous_position, self)
+			drawing = false
