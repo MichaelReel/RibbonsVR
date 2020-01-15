@@ -63,9 +63,12 @@ func draw_ribbon(delta):
 			previous_position = self.get_global_transform().origin
 			emit_signal("stroke_started", previous_position, self)
 			drawing = true
+			self.set_visible(false)
+			
 	else:
 		if drawing:
 			# Draw last section of ribbon
 			previous_position = self.get_global_transform().origin
 			emit_signal("stroke_ended", previous_position, self)
 			drawing = false
+			self.set_visible(true)
