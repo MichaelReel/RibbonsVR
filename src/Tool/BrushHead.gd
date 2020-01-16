@@ -27,7 +27,7 @@ func _process(delta):
 	
 	update_brush_size(delta)
 	
-	draw_ribbon(delta)
+	draw_ribbon()
 
 func update_brush_size(delta):
 	
@@ -47,7 +47,7 @@ func update_brush_size(delta):
 		plane_mesh.set_size(new_size)
 		translation.z = z_offset - new_size.y / 2
 
-func draw_ribbon(delta):
+func draw_ribbon():
 	if controller.is_button_pressed(15):
 		if drawing:
 			# Make the ribbon section as the controller is moved
