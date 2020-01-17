@@ -11,6 +11,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build Godot
       uses: josephbmanley/build-godot-action@v1.3.1
+      working-directory: src
       with:
         # Name of the exported binary
         name: Ribbons_VR.exe
