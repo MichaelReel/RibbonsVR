@@ -15,7 +15,7 @@ jobs:
         # Name of the exported binary
         name: Ribbons_VR.exe
         # Name of the preset in `export_presets.cfg` to use
-        preset: Windows Desktop
+        preset: "Windows Desktop"
         # Optional name of the subdirectory to put exported project in
         subdirectory: build
         # Set true to output an artifact zip file
