@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: [Windows]
 
     steps:
     - uses: actions/checkout@v1
@@ -15,7 +15,7 @@ jobs:
         # Name of the exported binary
         name: Ribbons_VR.exe
         # Name of the preset in `export_presets.cfg` to use
-        preset: "Windows"
+        preset: "Windows_Desktop"
         # Optional name of the subdirectory to put exported project in
         subdirectory: build
         # Set true to output an artifact zip file
