@@ -1,6 +1,6 @@
 extends ARVROrigin
 
-var test_order = [ "OpenVR" ]
+var test_order = [ "OpenVR", "Oculus" ]
 
 func _ready():
 	print("Available ARVR Interfaces:")
