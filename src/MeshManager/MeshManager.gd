@@ -68,7 +68,7 @@ func finish_current_ribbon_surface(draw_head : MeshInstance):
 
 func get_current_line(draw_head) -> AABB:
 	var trans : Transform = draw_head.get_global_transform()
-	var brush_size : PlaneMesh = draw_head.mesh.get_size()
+	var brush_size : Vector2 = draw_head.mesh.get_size()
 	var corner : Vector3 = Vector3(brush_size.x / 2.0, 0, brush_size.y / 2.0)
 	var width : Vector3 = Vector3(-brush_size.x, 0, 0)
 	
@@ -103,29 +103,29 @@ func update_strips(line : AABB):
 	
 	last_line = line
 
-# Debugging Functions
-
-func debug_orb_thing(position):
-	var debug_face_1 : MeshInstance = debug_orb_mesh.duplicate(0)
-	self.add_child(debug_face_1)
-	debug_face_1.set_owner(self)
-	debug_face_1.set_translation(position)
-
-func debug_clone_brush(draw_head : MeshInstance):
-	var mesh_inst : MeshInstance = MeshInstance.new()
-	var mesh_inst_back : MeshInstance = MeshInstance.new()
-	self.add_child(mesh_inst)
-	self.add_child(mesh_inst_back)
-	mesh_inst.set_mesh(draw_head.mesh.duplicate(0))
-	mesh_inst_back.set_mesh(draw_head.mesh.duplicate(0))
-	mesh_inst.set_owner(self)
-	mesh_inst_back.set_owner(self)
-	mesh_inst.set_transform(draw_head.get_global_transform())
-	mesh_inst_back.set_transform(draw_head.get_global_transform())
-	mesh_inst_back.mesh.set_flip_faces(true)
-
-func debug_drawing_line(draw_head : MeshInstance):
-	var line : AABB = get_current_line(draw_head)
-	debug_orb_thing(line.position)
-	debug_orb_thing(line.position + line.size)
+## Debugging Functions
+#
+#func debug_orb_thing(position):
+#	var debug_face_1 : MeshInstance = debug_orb_mesh.duplicate(0)
+#	self.add_child(debug_face_1)
+#	debug_face_1.set_owner(self)
+#	debug_face_1.set_translation(position)
+#
+#func debug_clone_brush(draw_head : MeshInstance):
+#	var mesh_inst : MeshInstance = MeshInstance.new()
+#	var mesh_inst_back : MeshInstance = MeshInstance.new()
+#	self.add_child(mesh_inst)
+#	self.add_child(mesh_inst_back)
+#	mesh_inst.set_mesh(draw_head.mesh.duplicate(0))
+#	mesh_inst_back.set_mesh(draw_head.mesh.duplicate(0))
+#	mesh_inst.set_owner(self)
+#	mesh_inst_back.set_owner(self)
+#	mesh_inst.set_transform(draw_head.get_global_transform())
+#	mesh_inst_back.set_transform(draw_head.get_global_transform())
+#	mesh_inst_back.mesh.set_flip_faces(true)
+#
+#func debug_drawing_line(draw_head : MeshInstance):
+#	var line : AABB = get_current_line(draw_head)
+#	debug_orb_thing(line.position)
+#	debug_orb_thing(line.position + line.size)
 	

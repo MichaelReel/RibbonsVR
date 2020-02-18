@@ -53,10 +53,13 @@ func draw_ribbon():
 			# Make the ribbon section as the controller is moved
 			# Finalise sections when the controller is moved far enough
 			var current_position = self.get_global_transform().origin
-			var moved_distance = current_position.distance_to(previous_position)
-			var brush_length = plane_mesh.get_size().y
+			var moved_distance : float = current_position.distance_to(previous_position)
+			var brush_length := plane_mesh.get_size().y
 			if (moved_distance >= brush_length):
-				previous_position = previous_position.linear_interpolate(current_position, moved_distance / brush_length)
+				var move_by := brush_length
+				while (move_by + brush_length <= moved_distance):
+					move_by += brush_length
+				previous_position = previous_position.linear_interpolate(current_position, moved_distance / move_by)
 				emit_signal("segment", previous_position, self)
 		else:
 			# Need to start a drawing mesh when none existent
